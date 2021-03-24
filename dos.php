@@ -1,6 +1,5 @@
 <?php
-if( !empty($_POST['nombre'])){
-    echo "<h1> Hola ".$_POST['nombre'] ."</h1>";
-    var_dump($_POST);
-}
-
+session_start(); //Esto indica que vamos a usar sesiones
+session_destroy();
+header('Location: uno.php');
+?>

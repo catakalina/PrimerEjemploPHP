@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -9,10 +10,25 @@
 </head>
 <body>
 <div>
-    <form target="_blank" action="dos.php" method="post" >
-        <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre">
+    <form action="uno.php" method="post" >
+        <input type="text" id="nombre" name="nombre" placeholder="Ingrese sus nombres">
+        <input type="text" id="apellido" name="apellido" placeholder="Ingrese sus apellidos">
         <input type="submit" name="Enviar">
     </form>
+</div>
+<div>
+    <?php
+
+    if(!empty($_POST['nombre']) && !empty($_POST['apellido'])){ //Verificamos si llega un nombre
+        $arrUser = [
+            'Nombres' => $_POST['nombre'],
+            'Apellidos' => $_POST['apellido']
+        ];
+        $_SESSION['ArrUsers'][] = $arrUser;
+        var_dump($_SESSION['ArrUsers']);
+    }
+    ?>
+    <a href="dos.php">Limpar Nombres</a>
 </div>
 </body>
 </html>
