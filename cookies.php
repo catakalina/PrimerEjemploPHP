@@ -1,10 +1,19 @@
-?php
-$nombre_cookie = "arrayConductor";
-$valor_cookie = md5("cata");
-$tiempo_cookie = time() + (2*24*60*60); //7 dias, 24 horas, 60 minutos y 60 segundos;
-$dominio_cookie = "/";
+<?php
+if(!empty($_COOKIE['arrayConductor']) ){ //Verificar si existe la cookie
+    $ArrAllConductores = unserialize($_COOKIE['arrayConductor']); //Obtener los conductores que ya existen
+    if(!empty($_POST['nombre']) && !empty($_POST['apellido'])){ //Verifica si llega el nombre y el apellido
+        $arrUser = [
+            'Nombres' => $_POST['nombre'],
+            'Apellidos' => $_POST['apellido']
+        ]; //Crea un array con los nombres y apellidos
 
-setcookie($nombre_cookie,$valor_cookie,$tiempo_cookie,"/", false);
+        array_push($ArrAllConductores, $arrUser); //Agregando el arrUser al ArrAllConductores
+        setcookie("arrayConductor", serialize($ArrAllConductores),time() + (2*24*60*60),"/", false); //a la cookie arrayConductor la remplazo con el ArrAllConductores
+        header("Location: cookies.php");
+    }
+}else{
+    setcookie("arrayConductor",serialize(array()),time() + (2*24*60*60),"/", false); //Creando la cookie
+}
 ?>
 <!doctype html>
 <html lang="es">
@@ -25,15 +34,8 @@ setcookie($nombre_cookie,$valor_cookie,$tiempo_cookie,"/", false);
 </div>
 <div>
     <?php
-
-    if(!empty($_POST['nombre'])){
-
-        if(md5($_POST['nombre']) == $_COOKIE['arrayConductor'] ){
-            echo "Si eres el usuario";
-        }else{
-            echo "Lo lamento eres un impostor";
-        }
-
+    if(!empty($_COOKIE['arrayConductor'])){
+        var_dump(unserialize($_COOKIE['arrayConductor']));
     }
 
     /*        if(!empty($_POST['nombre']) && !empty($_POST['apellido'])){ //Verificamos si llega un nombre
@@ -48,7 +50,7 @@ setcookie($nombre_cookie,$valor_cookie,$tiempo_cookie,"/", false);
             $arrayConductor = !empty($_SESSION['arrayConductor']) ? $_SESSION['arrayConductor'] : '';*/
 
     ?>
-    <a href="#">Limpar Nombres</a>
+    <a href="deletedCookie.php">Limpar Nombres</a>
 </div>
 
 </body>
