@@ -137,10 +137,10 @@ foreach ($arrayUsuarios as $usuario){
 # Tambien sirve para comentar una linea
 //echo 'Hola $nombre </br>';//Comillas Simples
 //echo "Hola ".$nombre;   //Comillas Dobles
-/*if ($nombre == "Diego"){
+/*if ($nombre == "catalina"){
     echo "Hola ".$nombre;
-}else if($nombre == "Juan"){
-    echo "Hola Juan";
+}else if($nombre == "lau"){
+    echo "Hola lau";
 }else{
     echo "Hola Usuario";
 }*/

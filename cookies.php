@@ -1,11 +1,15 @@
 <?php
 if(!empty($_COOKIE['arrayConductor']) ){ //Verificar si existe la cookie
     $ArrAllConductores = unserialize($_COOKIE['arrayConductor']); //Obtener los conductores que ya existen
-    if(!empty($_POST['nombre']) && !empty($_POST['apellido'])){ //Verifica si llega el nombre y el apellido
+    if(!empty($_POST['nombre']) && !empty($_POST['apellido'] && !empty($_POST['hora entrada'] && !empty($_POST['hora salida'] && !empty($_POST['edad'] && !empty($_POST['codigo del bus'])))))){ //Verifica si llega el nombre el apellido la hora de ingreso la hora de salida la edad y el codigo del bus
         $arrUser = [
             'Nombres' => $_POST['nombre'],
-            'Apellidos' => $_POST['apellido']
-        ]; //Crea un array con los nombres y apellidos
+            'Apellidos' => $_POST['apellido'],
+            'Hora entrada' => $_POST['hora entrada'],
+            'Hora salida' => $_POST['hora salida'],
+            'Edad' => $_POST['edad'],
+            'Codigo del bus' => $_POST['codigo del bus'],
+        ]; //Crea un array con los nombres , apellidos , horsa de entrada , hora de salida , edad , codigo del bus
 
         array_push($ArrAllConductores, $arrUser); //Agregando el arrUser al ArrAllConductores
         setcookie("arrayConductor", serialize($ArrAllConductores),time() + (2*24*60*60),"/", false); //a la cookie arrayConductor la remplazo con el ArrAllConductores
